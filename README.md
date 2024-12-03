@@ -30,8 +30,8 @@
 
 ## Full NGINX Tutorial Demo Project with Nodejs Docker
 
-https://www.youtube.com/watch?v=q8OleYuqntY
-https://gitlab.com/twn-youtube/nginx-crash-course.git 
+- https://www.youtube.com/watch?v=q8OleYuqntY
+- https://github.com/RodrigoMvs123/Full-NGINX-Tutorial-Demo-Project-with-Nodejs-Docker.git
 
 #### What is Nginx ?
 #### What is it used for ?
