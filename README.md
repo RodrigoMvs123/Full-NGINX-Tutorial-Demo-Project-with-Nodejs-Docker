@@ -26,3 +26,17 @@
 
 ##### create self-signed certificate
 `openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout nginx-selfsigned.key -out nginx-selfsigned.crt`
+
+
+## Full NGINX Tutorial Demo Project with Nodejs Docker
+
+https://www.youtube.com/watch?v=q8OleYuqntY
+https://gitlab.com/twn-youtube/nginx-crash-course.git 
+
+#### What is Nginx ?
+#### What is it used for ?
+
+1. Dockerize Node.js app
+2. Run 3 web servers
+3. Install and Configure NGINX as load balancer
+4. Configure Secure HTTPS 
