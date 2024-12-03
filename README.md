@@ -40,3 +40,13 @@
 2. Run 3 web servers
 3. Install and Configure NGINX as load balancer
 4. Configure Secure HTTPS 
+
+#### NGINX as Web Server
+
+> A web server refers to both the physical machine and software running on the machine 
+
+> Primary function is to **serve web pages** to client browser's 
+
+NGINX is a high performance web server 
+
+> Piece of software on a server, that handles HTTP requests
