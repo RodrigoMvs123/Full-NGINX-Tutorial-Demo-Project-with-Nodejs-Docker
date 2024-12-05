@@ -61,15 +61,17 @@ When a large number of requests goes to NGINX servers NGINX can act as a Load Ba
 
 **Proxy Server** = Intermediary server that forwards client requests to other servers 
 
+
 Some **Load Balancing Methods** include 
 
 **Least Connections**
-
+```
 Routes traffic to the server with the fewest active connections  
-
+```
 **Round Robin**
-
+```
 Distributes clients requests in a **sequential, cyclical manner** to each server in the group
+```
 
 #### Load Balancing is just one functionality of ENGINX Proxy 
 
@@ -78,6 +80,7 @@ Distributes clients requests in a **sequential, cyclical manner** to each server
 Instead we want to keep one file copy
 
 > Do the heavy lifting once 
+
 > And store the response 
 
 And send it to everyone who requested 
