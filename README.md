@@ -51,6 +51,10 @@ NGINX is a high performance web server
 
 > Piece of software on a server, that handles HTTP requests
 
+#### Load Balancing 
+
+Extension for English language correction
+
 When a large number of requests goes to NGINX servers NGINX can act as a Load Balancer
 
 > **Distributes incoming traffic** across multiple backend servers 
@@ -70,11 +74,11 @@ Routes traffic to the server with the fewest active connections
 **Round Robin**
 ```
 Distributes clients requests in a **sequential, cyclical manner to each server in the group
-```
+```  
 
-#### Load Balancing is just one functionality of ENGINX Proxy 
+## Caching
 
-**Caching** 
+#### Cashing is a core feature of NGINX Proxy  
 
 Instead we want to keep one file copy
 
@@ -82,4 +86,35 @@ Instead we want to keep one file copy
 
 > And store the response 
 
+> Cache responses from backend server for frequently accessed resources 
+
+> Copies are stored temporarily to **improve the performance**
+
 And send it to everyone who requested 
+
+## Security
+
+Only one server that is publicly available 
+
+> Consolidated Security 
+
+> Centralized Access Control 
+
+> Minimized Exposure 
+
+> Centralized Logging and Monitoring 
+
+Only one Entrypoint 
+
+**Encrypted Communication 
+
+> SSL/Termination Offloading 
+
+> NGINX can handle SSL/TLS encryption and decryption 
+
+NGINX forwards the encrypted message 
+
+> Web server decrypts the message itself 
+
+
+
