@@ -151,4 +151,24 @@ Proxy Server
 Forward traffic to other web servers 
 ```
 
+#### Serving file itself
+
+> Example of web server serving static files 
+
+> **"location"** directive defines how to server should process specific types of requests 
+
+nginx.config 
+```nginx 
+server { 
+    listen 80;
+    server name example.com www.example.com;
+
+    location / {
+        root /var/www/example.com;
+        index   index.html index.html;
+    }
+}
+```
+
+#### SSl/TLS Encryption Configuration 
 
