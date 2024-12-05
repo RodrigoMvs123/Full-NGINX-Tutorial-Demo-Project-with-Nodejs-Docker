@@ -170,5 +170,39 @@ server {
 }
 ```
 
-#### SSl/TLS Encryption Configuration 
+#### SSL/TLS Encryption Configuration 
 
+> **Redirect** all HTTP requests to HTTPS
+
+nginx.config 
+```nginx 
+server { 
+    listen 80;
+    server name example.com www.example.com;
+
+    location / {
+        root /var/www/example.com;
+        index   index.html index.html;
+    }
+
+
+server {
+    listen 443 ssl;
+    server name example.com www.example.com;
+
+    # SSl Configuration 
+    ssl_certificate /etc/letsencrypt/live/example.com/fullchain.pem;
+    ssl_certificate_key /etc/letsencrypt/live/example.com/privkey.pem;
+
+    # Security Headers
+    add_header Strict-Transport_Security "max-age=31536000:includeSubDomains" always;
+    #...
+
+    location / {
+        root /var/www/example.com;
+        index index.html index.html;
+    }
+
+    }
+}
+```
