@@ -50,3 +50,15 @@
 NGINX is a high performance web server 
 
 > Piece of software on a server, that handles HTTP requests
+
+When a large number of requests goes to NGINX servers NGINX can act as a Load Balancer
+
+> **Distributes incoming traffic** across multiple backend servers 
+
+> To balance the load, improve performance and provide redundancy 
+
+**Proxy** = General term meaning action on behalf of another 
+
+**Proxy Server** = Intermediary server that forwards client requests to other servers 
+
+
