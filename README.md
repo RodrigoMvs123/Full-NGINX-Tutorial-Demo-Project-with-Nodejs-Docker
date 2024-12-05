@@ -67,7 +67,7 @@ When a large number of requests goes to NGINX servers NGINX can act as a Load Ba
 
 **Proxy Server** = Intermediary server that forwards client requests to other servers 
 
-## Some Load Balancing Methods include 
+#### Some Load Balancing Methods include 
 
 **Least Connections**
 ```
@@ -135,4 +135,20 @@ NGINX Proxy can compress the response ( Ex: Video of Netflix )
 > Breaks the file into smaller chunks ( Video Streaming )
 
 ## NGINX Configuration 
+
+> The main config file is typically named **"nginx.conf"** and is usually located in the **"/etc/nginx/"** folder 
+
+> Using a custom syntax comprising: **Directives** **Blocks** 
+
+> This set up the **server's behavior** 
+
+Web Server
+``
+Serving files itself
+````
+Proxy Server
+```
+Forward traffic to other web servers 
+```
+
 
