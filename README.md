@@ -51,7 +51,9 @@ NGINX is a high performance web server
 
 > Piece of software on a server, that handles HTTP requests
 
-#### Load Balancing 
+#### Functionalities of NGINX as a Proxy Server 
+
+## Load Balancing 
 
 Extension for English language correction
 
@@ -106,7 +108,7 @@ Only one server that is publicly available
 
 Only one Entrypoint 
 
-**Encrypted Communication 
+#### Encrypted Communication 
 
 > SSL/Termination Offloading 
 
@@ -116,5 +118,21 @@ NGINX forwards the encrypted message
 
 > Web server decrypts the message itself 
 
+SSL ( Enforce HTTPS )
 
+> **Accept** encrypted traffic 
+
+> **Deny** non encrypted requests 
+
+## Compression 
+
+NGINX Proxy can compress the response ( Ex: Video of Netflix )
+
+> To reduce bandwidth usage and improve load times
+
+## Segmentation - Sending response in chunks 
+
+> Breaks the file into smaller chunks ( Video Streaming )
+
+## NGINX Configuration 
 
