@@ -143,9 +143,9 @@ NGINX Proxy can compress the response ( Ex: Video of Netflix )
 > This set up the **server's behavior** 
 
 Web Server
-``
+```
 Serving files itself
-````
+```
 Proxy Server
 ```
 Forward traffic to other web servers 
