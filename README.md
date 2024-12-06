@@ -575,6 +575,12 @@ node server.js
 > node app is listening on port 3000
 ```
 
+**Localhost**
+
+> Refers to the **local machine** that you are currently using 
+
+> Developers use localhost to **simulate network requests to services running on their own machine** 
+
 Open in the Browser 
 
 - localhost:3000 ( Web Application served by Node.js Backend )
@@ -600,6 +606,65 @@ together
                             TechWorld with Nana. All Rights Reserved.
                             Follow us on: Linkedin | Twitter | Instagram 
 ``` 
+
+The act of **refresh** the page makes 
+
+#### Visual Studio Code
+Terminal
+```
+node server.js 
+> node app is listening on port 3000
+> Request served by node app
+> Request served by node app
+```
+
+Instead of the browser request going directly into the express server on Node.js 
+
+> It will first hit the NGINX as Proxy ( Server ) then NGINX will forward the request to Node.js
+
+## Dockerize the Web Application
+
+> We will start **3 instances** of the Node.js server ( Web Application ) as Docker containers
+
+``` 
+Node.js server              Node.js server               Node.js server 
+```
+
+Dockerfile = **Contains instructions ( blueprint ) to build the Docker image**, defining what goes into the image and how the container should behave when it is running 
+
+#### Source Code
+
+```
+Visual Studio Code
+Explorer
+Open Editors 
+index.html
+server.js
+package.json
+Dockerfile
+```
+
+```dockerfile
+FROM node:14
+
+WORKDIR /app
+
+COPY server.js .
+COPY index.html .
+COPY images ./images
+COPY package.json .
+
+RUN npm install
+
+EXPOSE 3000
+
+CMD ["node", "server.js"]
+```
+
+
+
+## Put NGINX Proxy in front of our web application 
+
 
 
 
