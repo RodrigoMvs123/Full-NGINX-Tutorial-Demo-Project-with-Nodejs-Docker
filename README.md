@@ -338,7 +338,7 @@ index.html
 ```
 
 index.html 
-```html css 
+```html 
 <!DOCTYPE html>
 <html lang="en">
 
@@ -463,6 +463,25 @@ Open the web application in the Browser
 C:\Users\usuario\Desktop\Rodrigo\Full NGINX Tutorial Demo Project with Nodejs Docker\Full-NGINX-Tutorial-Demo-Project-with-Nodejs-Docker\index.html
 ```
 
+```
+TWN Career Quiz 
+Your Custom Recommended Path 
 
+Home           Best Courses            Fun Tutorials               About Tech World with Nana
 
- 
+TechWorld with Nana Programs 
+
+    DEVOPS                           ...                    ...
+   BOOTCAMP
+    by TWN
+
+Devops Bootcamp 
+
+Finally learn with structured 
+guided course, all Devops tools 
+together
+
+                            TechWorld with Nana. All Rights Reserved.
+                            Follow us on: Linkedin | Twitter | Instagram 
+``` 
+
