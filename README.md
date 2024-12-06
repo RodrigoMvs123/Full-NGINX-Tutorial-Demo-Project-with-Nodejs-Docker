@@ -157,6 +157,8 @@ Forward traffic to other web servers
 
 > **"location"** directive defines how to server should process specific types of requests 
 
+**Redirect** all HTTP requests to HTTPS
+
 nginx.config 
 ```nginx 
 server { 
@@ -172,7 +174,7 @@ server {
 
 #### SSL/TLS Encryption Configuration 
 
-> **Redirect** all HTTP requests to HTTPS
+Server content over **HTTPS** with SSL/TLS configured
 
 nginx.config 
 ```nginx 
@@ -206,3 +208,105 @@ server {
     }
 }
 ```
+
+#### Configure Loading Balancing 
+
+nginx.conf
+```nginx
+http {
+    upstream myapp1 {
+        server srv1.example.com;
+        server srv2.example.com;
+        server srv3.example.com;
+    }
+
+    server {
+        listen 80;
+
+        location / {
+            proxy pass http://myapp1;
+        }
+    }
+}
+```
+
+> In the example, there are 3 instances of the app running on svr1-svr3
+
+> All the requests are proxied to the server group myapp1
+
+> Default to **round-robin** algorithm 
+
+Selecting the least busy server 
+
+nginx.conf
+```nginx 
+http {
+    upstream myapp1 {
+        least_conn;
+        server srv1.example.com;
+        server srv2.example.com;
+        server srv3.example.com;
+    }
+}
+```
+
+#### Enable the Caching of Responses 
+
+- https://nginx.org/en/docs/dirindex.html 
+
+nginx.conf
+```nginx
+http {
+    #...   
+    proxy cache path /data/nginx/cache keys zone=mycache:10m; 
+}
+```
+
+> Then include the **proxy_cache** directive in the context (protocol type, virtual server, or location) for which you want to cache server responses, specifying the zone name defined by the **keys_zone** parameter to the **proxy_cache_path** directive ( in this case, **mycache** ):
+
+nginx.conf
+```nginx
+http {
+    #...
+    proxy cache path /data/nginx/cache keys zone=mycache:10m; 
+    server {
+        proxy_cache mycache;
+        location / {
+            proxy_pass https://localhost:8000;
+        }
+    }
+}
+```
+
+## NGINX in Kubernetes 
+
+#### NGINX as a Kubernetes Ingress Controller 
+
+What is **Ingress Controller** ?
+
+> A specialized load balancer for **managing ingress ( incoming ) traffic** in Kubernetes 
+
+> It handles the **routing to the appropriated services** based on the rules defined in an ingress resource 
+
+> **NOT publicly accessible** 
+
+#### Cloud Platform Load Balancer 
+
+> Cloud load balancer handles the incoming traffic from the internet 
+
+> Forward request to the Ingress Controller inside the cluster 
+
+> Cluster component is **never directly exposed** to publicly access 
+
+> Intelligent routing based on path and host matching 
+
+The AWS service for load balancing is called Elastic Load Balancing (ELB). It automatically distributes incoming application traffic across multiple targets, such as Amazon EC2 instances, containers, IP addresses, Lambda functions, and virtual appliances.
+
+> WWW / AWS Load Balancer / Ingress Controller routes Requests to Online-Cart or Request to Payment, etc... / Kubernetes Cluster ( Online-Cart, Payment, etc... ) 
+
+
+
+
+
+
+ 
