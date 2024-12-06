@@ -338,7 +338,7 @@ index.html
 ```
 
 index.html 
-```html
+```html css 
 <!DOCTYPE html>
 <html lang="en">
 
@@ -456,6 +456,8 @@ index.html
 ```
 
 Open the web application in the Browser 
+
+> Absolute Path
 
 ```
 C:\Users\usuario\Desktop\Rodrigo\Full NGINX Tutorial Demo Project with Nodejs Docker\Full-NGINX-Tutorial-Demo-Project-with-Nodejs-Docker\index.html
