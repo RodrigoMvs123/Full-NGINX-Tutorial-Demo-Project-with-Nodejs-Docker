@@ -527,6 +527,8 @@ What is **package.json** ?
 Download Node.js 
 
 - https://nodejs.org/en/download/package-manager ( npm comes within Node.js )
+
+#### Source Code
  
 ```
 Visual Studio Code
@@ -560,7 +562,48 @@ Installing **express** and **path** packages
 
 #### Visual Studio Code
 Terminal 
-´npm install´ 
+```
+npm install
+``` 
+
+To start web application **server.js**
+
+#### Visual Studio Code
+Terminal
+```
+node server.js 
+> node app is listening on port 3000
+```
+
+Open in the Browser 
+
+- localhost:3000 ( Web Application served by Node.js Backend )
+
+```
+TWN Career Quiz 
+Your Custom Recommended Path 
+
+Home           Best Courses            Fun Tutorials               About Tech World with Nana
+
+TechWorld with Nana Programs 
+
+    DEVOPS                           ...                    ...
+   BOOTCAMP
+    by TWN
+
+Devops Bootcamp 
+
+Finally learn with structured 
+guided course, all Devops tools 
+together
+
+                            TechWorld with Nana. All Rights Reserved.
+                            Follow us on: Linkedin | Twitter | Instagram 
+``` 
+
+
+
+
 
 
 
