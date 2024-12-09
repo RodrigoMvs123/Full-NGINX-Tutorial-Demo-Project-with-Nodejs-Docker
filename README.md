@@ -704,6 +704,10 @@ docker run -p 3000:3000 myapp:1.0
 > Request served by node app ( Refreshed Page )
 ```
 
+Open in the Browser 
+
+- localhost:3000 ( Web Application served by Node.js Backend )
+
 ```
 TWN Career Quiz 
 Your Custom Recommended Path 
@@ -880,7 +884,154 @@ services:
       - "3003:3000"
 ```
 
+#### Visual Studio Code
+Terminal 
+```
+docker-compose up --build -d 
+> [+] building 3.4s (21/31)
+-> [app1 internal] load build definition from Dockerfile
+...
+-> [app2 internal] load build definition from Dockerfile
+...
+-> [app3 internal] load build definition from Dockerfile
+...
 
+-> [app1] exporting to image 
+-> -> exporting layers 
+-> -> writing image sha256:...
+-> -> naming to docker.io/Rodrigo\Full NGINX Tutorial Demo Project with Nodejs Docker\Full-NGINX-Tutorial-Demo-Project-with-Nodejs-Docker
+-> [app2] exporting to image 
+-> -> exporting layers 
+-> -> writing image sha256:...
+-> -> naming to docker.io/Rodrigo\Full NGINX Tutorial Demo Project with Nodejs Docker\Full-NGINX-Tutorial-Demo-Project-with-Nodejs-Docker
+-> [app3] exporting to image 
+-> -> exporting layers 
+-> -> writing image sha256:...
+-> -> naming to docker.io/Rodrigo\Full NGINX Tutorial Demo Project with Nodejs Docker\Full-NGINX-Tutorial-Demo-Project-with-Nodejs-Docker
+[+] Running 4/4
+Network Full-NGINX-Tutorial-Demo-Project-with-Nodejs-Docker_default Created
+Container Full-NGINX-Tutorial-Demo-Project-with-Nodejs-Docker-app1-1  Started
+Container Full-NGINX-Tutorial-Demo-Project-with-Nodejs-Docker-app2-1  Started
+Container Full-NGINX-Tutorial-Demo-Project-with-Nodejs-Docker-app3-1  Started 
+
+docker ps
+> CONTAINER ID     IMAGE              COMMAND                  CREATED      
+  be5...           Full-NGINX...app1  "docker-entrypoint.s...  38 seconds ago
+STATUS             PORTS                      NAMES 
+Up 37 seconds      0.0.0.0:3001->3000/tcp     Full-NGINX...-app1-1
+CONTAINER ID       IMAGE              COMMAND                  CREATED      
+  846...           Full-NGINX...app2  "docker-entrypoint.s...  38 seconds ago
+STATUS             PORTS                      NAMES 
+Up 37 seconds      0.0.0.0:3002->3000/tcp     Full-NGINX...-app2-1
+CONTAINER ID       IMAGE              COMMAND                  CREATED      
+  ad3...           Full-NGINX...app3  "docker-entrypoint.s...  38 seconds ago
+STATUS             PORTS                      NAMES 
+Up 37 seconds      0.0.0.0:3003->3000/tcp     Full-NGINX...-app3-1
+```
+
+Open in the Browser 
+
+- localhost:3001 ( Web Application served by Node.js Backend )
+
+```
+TWN Career Quiz 
+Your Custom Recommended Path 
+
+Home           Best Courses            Fun Tutorials               About Tech World with Nana
+
+TechWorld with Nana Programs 
+
+    DEVOPS                           ...                    ...
+   BOOTCAMP
+    by TWN
+
+Devops Bootcamp 
+
+Finally learn with structured 
+guided course, all Devops tools 
+together
+
+                            TechWorld with Nana. All Rights Reserved.
+                            Follow us on: Linkedin | Twitter | Instagram 
+``` 
+
+Open in the Browser 
+
+- localhost:3002 ( Web Application served by Node.js Backend )
+
+```
+TWN Career Quiz 
+Your Custom Recommended Path 
+
+Home           Best Courses            Fun Tutorials               About Tech World with Nana
+
+TechWorld with Nana Programs 
+
+    DEVOPS                           ...                    ...
+   BOOTCAMP
+    by TWN
+
+Devops Bootcamp 
+
+Finally learn with structured 
+guided course, all Devops tools 
+together
+
+                            TechWorld with Nana. All Rights Reserved.
+                            Follow us on: Linkedin | Twitter | Instagram 
+``` 
+
+
+Open in the Browser 
+
+- localhost:3003 ( Web Application served by Node.js Backend )
+
+```
+TWN Career Quiz 
+Your Custom Recommended Path 
+
+Home           Best Courses            Fun Tutorials               About Tech World with Nana
+
+TechWorld with Nana Programs 
+
+    DEVOPS                           ...                    ...
+   BOOTCAMP
+    by TWN
+
+Devops Bootcamp 
+
+Finally learn with structured 
+guided course, all Devops tools 
+together
+
+                            TechWorld with Nana. All Rights Reserved.
+                            Follow us on: Linkedin | Twitter | Instagram 
+``` 
+
+#### Visual Studio Code
+Terminal 
+```
+docker logs be5...
+> App1 is listening on port 3000
+  Request served by App1 ( Refreshed Page )
+  Request served by App1 ( Refreshed Page )
+
+docker logs 846...
+> App2 is listening on port 3000
+  Request served by App2 ( Refreshed Page )
+  Request served by App2 ( Refreshed Page )
+
+docker logs ad3...
+> App3 is listening on port 3000
+  Request served by App3 ( Refreshed Page )
+  Request served by App3 ( Refreshed Page )
+```
+
+#### Configure NGINX Proxy 
+
+
+
+  
 
 
 
