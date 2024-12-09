@@ -700,7 +700,186 @@ Terminal
 ```
 docker run -p 3000:3000 myapp:1.0
 > node app is listening on port 3000
+> Request served by node app ( Refreshed Page )
+> Request served by node app ( Refreshed Page )
 ```
+
+```
+TWN Career Quiz 
+Your Custom Recommended Path 
+
+Home           Best Courses            Fun Tutorials               About Tech World with Nana
+
+TechWorld with Nana Programs 
+
+    DEVOPS                           ...                    ...
+   BOOTCAMP
+    by TWN
+
+Devops Bootcamp 
+
+Finally learn with structured 
+guided course, all Devops tools 
+together
+
+                            TechWorld with Nana. All Rights Reserved.
+                            Follow us on: Linkedin | Twitter | Instagram 
+```
+
+#### Visual Studio Code
+Terminal 
+```
+docker ps 
+> CONTAINER ID    IMAGE        COMMAND                    CREATED            STATUS         PORTS                      NAMES 
+  7b7d15...       myapp:1.0    "docker-entrypoints.s...   26 seconds ago     Up 26 sec...   0.0.0.0:3000->3000/tcp     interesting_williamson 
+docker stop 7b7d15...
+```
+
+#### Start multiple instances ( Containers )
+
+Docker Compose = Tool to simplify the process of defining and running multiple containers 
+
+#### Source Code
+
+```
+Visual Studio Code
+Explorer
+Open Editors
+> images 
+> node_modules 
+docker-compose.yaml 
+index.html
+server.js
+package.json
+Dockerfile
+```
+
+docker-compose.yaml
+```yaml
+version: '3'
+services:
+  app1:
+    build: .
+    environment:
+      - APP_NAME=App1
+    ports:
+      - "3001:3000"
+
+  app2:
+    build: .
+    environment:
+      - APP_NAME=App2
+    ports:
+      - "3002:3000"
+
+  app3:
+    build: .
+    environment:
+      - APP_NAME=App3
+    ports:
+      - "3003:3000"
+```
+
+Access environment variables in the server.js application in node.js 
+
+```
+6 - const replicaApp = process.env.APP_NAME
+12 - console.log{`Request served by ${replicaApp}`};
+16 - console.log{`${replicaAPP} is listening on port ${port}`};
+```
+
+#### Source Code
+
+```
+Visual Studio Code
+Explorer
+Open Editors
+> images 
+> node_modules 
+docker-compose.yaml 
+index.html
+server.js
+package.json
+Dockerfile
+```
+
+server.js
+```javascript
+const express = require('express');
+const path = require('path');
+const app = express();
+const port = 3000;
+
+const replicaApp = process.env.APP_NAME
+
+const appName = process.env.APP_NAME
+
+app.use('/images', express.static(path.join(__dirname, 'images')));
+
+app.use('/', (req, res) => {
+    res.sendFile(path.join(__dirname, 'index.html'));
+    console.log{`Request served by ${replicaApp}`};
+});
+
+app.listen(port, () => {
+    console.log{`${replicaAPP} is listening on port ${port}`};
+});
+
+```
+
+We want to see, **which Node.js server is handling the request** 
+
+We want to run all 3 containers on the **same machine** 
+
+> So we need  to run then of **different ports**
+
+```
+8 - - "3001:3000"
+15 - - "3002:3000"
+22 -  - "3003:3000"
+```
+
+#### Source Code
+
+```
+Visual Studio Code
+Explorer
+Open Editors
+> images 
+> node_modules 
+docker-compose.yaml 
+index.html
+server.js
+package.json
+Dockerfile
+```
+
+docker-compose.yaml
+```yaml
+version: '3'
+services:
+  app1:
+    build: .
+    environment:
+      - APP_NAME=App1
+    ports:
+      - "3001:3000"
+
+  app2:
+    build: .
+    environment:
+      - APP_NAME=App2
+    ports:
+      - "3002:3000"
+
+  app3:
+    build: .
+    environment:
+      - APP_NAME=App3
+    ports:
+      - "3003:3000"
+```
+
 
 
 
