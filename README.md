@@ -1027,11 +1027,119 @@ docker logs ad3...
   Request served by App3 ( Refreshed Page )
 ```
 
-#### Configure NGINX Proxy 
+## Configure NGINX Proxy 
 
+> We want to have **1 entrypoint that forwards** to one of the backend servers
 
+**ENGINX** 
 
+> Load Balancer 
+
+> Handle SSL encryption 
+
+**Instal and Configure** NGINX 
+
+> Load balance to the 3 web servers 
+
+> Configure **HTTPS** 
+
+Download and Install NGINX 
+
+- https://nginx.org/en/download.html 
+
+For Windows 
+
+Command Prompt ( Terminal )
+```
+cd c:\
+unzip nginx-1.27.3.zip
+cd nginx-1.27.3
+start nginx
+nginx -v
+whereis nginx 
+nginx -V
+cat /opt/homebrew/etc/nginx/nginx.conf
+```
   
+Visual Studio Command Palette  
+
+>Shell Command: install 'code' command in PATH
+
+```
+Program Files\nginx-1.27.3\conf
+```
+
+#### Load balance to the 3 web servers
+
+Directives 
+
+**worker_processes** 
+
+> Controls **how many parallel processes** Nginx spawns to handle client requests 
+
+#### Source Code
+
+```
+Visual Studio Code
+Explorer
+Open Editors
+> images 
+> node_modules 
+docker-compose.yaml 
+index.html
+server.js
+package.json
+Dockerfile
+nginx.conf
+```
+
+nginx.conf
+```conf 
+# Main context (this is the global configuration)
+worker_processes 1;
+
+events {
+    worker_connections 1024;
+}
+
+http {
+    include mime.types;
+
+    # Upstream block to define the Node.js backend servers
+    upstream nodejs_cluster {
+        server 127.0.0.1:3001;
+        server 127.0.0.1:3002;
+        server 127.0.0.1:3003;
+    }
+
+    server {
+        listen 443 ssl;  # Listen on port 443 for HTTPS
+        server_name localhost;
+
+        # SSL certificate settings
+        ssl_certificate /Users/nana/nginx-certs/nginx-selfsigned.crt;
+        ssl_certificate_key /Users/nana/nginx-certs/nginx-selfsigned.key;
+
+        # Proxying requests to Node.js cluster
+        location / {
+            proxy_pass http://nodejs_cluster;
+            proxy_set_header Host $host;
+            proxy_set_header X-Real-IP $remote_addr;
+        }
+    }
+
+    # Optional server block for HTTP to HTTPS redirection
+    server {
+        listen 8080;  # Listen on port 80 for HTTP
+        server_name localhost;
+
+        # Redirect all HTTP traffic to HTTPS
+        location / {
+            return 301 https://$host$request_uri;
+        }
+    }
+}
+```
 
 
 
