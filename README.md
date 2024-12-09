@@ -632,6 +632,18 @@ Node.js server              Node.js server               Node.js server
 
 Dockerfile = **Contains instructions ( blueprint ) to build the Docker image**, defining what goes into the image and how the container should behave when it is running 
 
+> 1. Use node base image to have node and npm available
+
+> 2. Create /app folder and set as working directory 
+
+> 3. Copy all necessary files from your host into the Docker image
+
+> 4. Execute npm install to install dependencies 
+
+> 5. Expose port 3000
+
+> 6. Execute node command to start the server 
+
 #### Source Code
 
 ```
@@ -644,6 +656,7 @@ package.json
 Dockerfile
 ```
 
+Dockerfile
 ```dockerfile
 FROM node:14
 
@@ -661,9 +674,40 @@ EXPOSE 3000
 CMD ["node", "server.js"]
 ```
 
+#### Docker Image 
+
+> Standalone, executable package that includes everything needed to run the application 
+
+> It is a snap shot of an environment that can be used to create and run containers 
+
+#### Visual Studio Code
+Terminal 
+```
+docker build -t myapp:1.0 . 
+docker images | grep myapp 
+> myapp                            1.0               b006...         20 seconds ago    864MB
+```
+
+> We can now easily run multiples instances of node.js server **without any conflicts** 
+
+#### Start the containers... 
+
+-p parameter = Bind the port on your local machine to a port inside the Docker container. 
+To make an app running inside a container accessible from the outside world  
+
+#### Visual Studio Code
+Terminal 
+```
+docker run -p 3000:3000 myapp:1.0
+> node app is listening on port 3000
+```
+
+
+
 
 
 ## Put NGINX Proxy in front of our web application 
+
 
 
 
