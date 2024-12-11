@@ -1073,9 +1073,150 @@ Program Files\nginx-1.27.3\conf
 
 Directives 
 
-**worker_processes** 
+**Worker_Processes** 
 
 > Controls **how many parallel processes** Nginx spawns to handle client requests 
+
+> Instead of using a new process for every incoming connection, Nginx uses work processes that **handle many connections** using a single-threaded event loop
+
+> The value is the number of work processes Nginx should create 
+
+> Each work process runs independently and can handle its own set of connections 
+
+This configuration directly influences how well it can handle traffic ( Performance )
+
+> Should be tunned according to the server's hardware ( CPU cores ) and expected traffic load 
+
+#### Production environment 
+
+```
+4 Work Processes /  4 CPU Cores / Allows Nginx to efficiently use all CPU cores 
+```
+
+**auto** = Nginx automatically detects the number of CPU cores available on the server and starts a corresponding number of worker nodes
+
+```
+# Main context 
+worker_processes auto;
+```
+
+#### worker_connections 
+
+> Per worker process: **how many simultaneous connections** can be opened 
+
+If you have **1 worker process**, you will be able to serve **1024 clients** 
+
+If you have **2 worker processes**, you will be able to serve 2x1024 = *2048 clients** ( Increases memory usage )
+
+```
+events {
+    worker_connections 1024;
+} 
+```
+
+#### http
+
+**http** = configuration specific to HTTP and affecting all virtual servers 
+
+Server Block 
+
+> Defines how Nginx should handle requests for a particular domain or IP address 
+
+- listen 
+
+How to **listen** for connections 
+
+> The IP address and port on which the server will accept requests 
+
+Which domain or subdomain the configuration applies to 
+
+How to route the requests 
+
+- server_name
+
+> Which domain or IP address this server block should respond to
+
+- location 
+
+> The root (/) URL, will apply to all requests unless more specific location blocks are defined 
+ 
+Nginx as Proxy Server ( proxy_pass )
+
+Pass the traffic to the Node.js application
+
+> Tells Nginx to "pass" request to another server, making it act as a reverse proxy 
+
+- upstream 
+
+> Refers to servers that Nginx forward requests to 
+
+> "upstream" name is based on the flow of data
+
+> **Upstream servers** = Refers to traffic going from a client toward the source or higher-level infra, in this case application server
+
+> **Downstream servers** = Traffic going back to the client is "downstream" 
+
+> Upstream block defines a group of backend servers that will handle requests forwarded by Nginx 
+
+localhost = 127.0.0.1 
+
+port = 3001, 3002, 3003 ( Upstream of Nginx )
+
+We want to forward info from the original client requests to the backend servers ( location )
+
+> They provide useful information, which backend servers can use for logging or processing, etc
+
+```
+Original IP address
+Original Host
+Referrer Information 
+Custom Headers
+```
+
+Common headers that can be forwarded 
+
+```conf
+location / {
+    # Pass client information to the backend
+    proxy_set_header Host $host;
+    proxy_set_header X-Real_IP $remote_addr;
+    proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+    proxy_set_header X-Forwarded-Proto $scheme;
+    proxy_set_header X_Forwarded-Port $server_port;
+
+    # Forward client browser and session information
+    proxy_set_header User-Agent $http_user_agent;
+    proxy_set_header Cookie $http_cookie;
+    proxy_set_header Accept-Language $http_accept_language;
+    proxy_set_header Referrer $http_referrer;
+
+    # Forward client's authorization data
+    proxy_set_header Authorization $http_authorization;
+
+    # Custom headers ( optional )
+    proxy_set_header X-Custom-Header "MyAppSpecificValue";
+}
+```
+
+http {
+    upstream nodejs_cluster {
+        server 127.0.0.1:3001;
+        server 127.0.0.1:3002;
+        server 127.0.0.1:3003;
+    }
+
+    server {
+        listen 8080;
+        server_name localhost; 
+
+        location / {
+            proxy_pass http://nodejs_cluster;
+            proxy_set_header Host $host;    
+        }
+    }
+}
+
+
 
 #### Source Code
 
