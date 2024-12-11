@@ -1198,6 +1198,12 @@ location / {
 }
 ```
 
+> When Nginx acts as a reverse proxy, the requests coming to the backend servers originate from Nginx, **not directly from the client**
+
+> As a result, backend server would see the IP address of the Nginx server as the source of the request
+
+We can tell Nginx to also pass the Original/Real IP address of the client 
+
 http {
     upstream nodejs_cluster {
         server 127.0.0.1:3001;
@@ -1212,6 +1218,7 @@ http {
         location / {
             proxy_pass http://nodejs_cluster;
             proxy_set_header Host $host;    
+            proxy_set_header X-Real-IP $remote_addr;
         }
     }
 }
