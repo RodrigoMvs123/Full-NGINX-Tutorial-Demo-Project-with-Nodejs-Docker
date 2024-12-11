@@ -1204,6 +1204,7 @@ location / {
 
 We can tell Nginx to also pass the Original/Real IP address of the client 
 
+```
 http {
     upstream nodejs_cluster {
         server 127.0.0.1:3001;
@@ -1222,7 +1223,7 @@ http {
         }
     }
 }
-
+```
 
 
 #### Source Code
