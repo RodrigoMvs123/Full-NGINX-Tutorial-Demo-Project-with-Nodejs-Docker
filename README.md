@@ -1204,17 +1204,269 @@ location / {
 
 We can tell Nginx to also pass the Original/Real IP address of the client 
 
+- include ( MIME types )
+
+We need to tell Nginx to **include the corresponding MIME types** in the "content-type" response header, when sending a file
+
+> It helps the **client understand how to process or render the file**  
+
+> mime.types is actually a file, that Nginx uses to map file extension to MIME types  
+
+How does Nginx decide to which server to forward the request to ?
+
+> Load balancing Algorithms
+
+```
+Round Robin ( Default )
+
+Start from first server to the last one and it starts again from the first to the last one
+```
+
+```
+least_conn
+
+Request is sent to the server with the **least number of active connections** 
+```
+
+#### Visual Studio Code
+Terminal
+```
+nginx
+nginx -v
+
+> ...
+--http-log-path=/...
+
+cat ... ( path )
+
+> ...
+```
+
+Open in the Browser 
+
+- localhost:8080 ( Web Application served by Node.js Backend )
+
+```
+TWN Career Quiz 
+Your Custom Recommended Path 
+
+Home           Best Courses            Fun Tutorials               About Tech World with Nana
+
+TechWorld with Nana Programs 
+
+    DEVOPS                           ...                    ...
+   BOOTCAMP
+    by TWN
+
+Devops Bootcamp 
+
+Finally learn with structured 
+guided course, all Devops tools 
+together
+
+                            TechWorld with Nana. All Rights Reserved.
+                            Follow us on: Linkedin | Twitter | Instagram 
+``` 
+
+#### Visual Studio Code
+Terminal
+```
+docker compose down
+
+> [+] Running 0/3
+Container Full-NGINX-Tutorial-Demo-Project-with-Nodejs-Docker-app1-1  Stopping
+Container Full-NGINX-Tutorial-Demo-Project-with-Nodejs-Docker-app2-1  Stopping
+Container Full-NGINX-Tutorial-Demo-Project-with-Nodejs-Docker-app3-1  Stopping
+
+> [+] Running 4/4
+Container Full-NGINX-Tutorial-Demo-Project-with-Nodejs-Docker-app1-1  Removed
+Container Full-NGINX-Tutorial-Demo-Project-with-Nodejs-Docker-app2-1  Removed
+Container Full-NGINX-Tutorial-Demo-Project-with-Nodejs-Docker-app3-1  Removed
+Network Full-NGINX-Tutorial-Demo-Project-with-Nodejs-Docker_default Created
+```
+
+Open in the Browser 
+
+- localhost:8080 ( Web Application served by Node.js Backend )
+
+```
+                           502 Bad Gateway
+                            nginx/1.27.3
+```
+
+#### Visual Studio Code
+Terminal
+```
+docker-compose up --build
+
+> [+] Running 4/4
+Network Full-NGINX-Tutorial-Demo-Project-with-Nodejs-Docker_default Created
+Container Full-NGINX-Tutorial-Demo-Project-with-Nodejs-Docker-app1-1  Created
+Container Full-NGINX-Tutorial-Demo-Project-with-Nodejs-Docker-app2-1  Created
+Container Full-NGINX-Tutorial-Demo-Project-with-Nodejs-Docker-app3-1  Created  
+
+Attaching to app1-1, app2-1, app3-1
+app1-1  | App1 is listening on port 3000
+app2-1  | App2 is listening on port 3000
+app3-1  | App3 is listening on port 3000
+```
+
+Open in Browser ( Refresh Page )
+
+- localhost:8080 ( Web Application served by Node.js Backend )
+
+```
+TWN Career Quiz 
+Your Custom Recommended Path 
+
+Home           Best Courses            Fun Tutorials               About Tech World with Nana
+
+TechWorld with Nana Programs 
+
+    DEVOPS                           ...                    ...
+   BOOTCAMP
+    by TWN
+
+Devops Bootcamp 
+
+Finally learn with structured 
+guided course, all Devops tools 
+together
+
+                            TechWorld with Nana. All Rights Reserved.
+                            Follow us on: Linkedin | Twitter | Instagram 
+``` 
+
+#### Visual Studio Code
+Terminal
+```
+> [+] Running 4/4
+Network Full-NGINX-Tutorial-Demo-Project-with-Nodejs-Docker_default Created
+Container Full-NGINX-Tutorial-Demo-Project-with-Nodejs-Docker-app1-1  Created
+Container Full-NGINX-Tutorial-Demo-Project-with-Nodejs-Docker-app2-1  Created
+Container Full-NGINX-Tutorial-Demo-Project-with-Nodejs-Docker-app3-1  Created  
+
+Attaching to app1-1, app2-1, app3-1
+app1-1  | App1 is listening on port 3000
+app2-1  | App2 is listening on port 3000
+app3-1  | App3 is listening on port 3000
+app1-1  | Request served by App1
+app2-1  | Request served by App2
+```
+
+- configure HTTPS - Secure Connection 
+
+> HTTPS uses SSL to encrypt the data transmitted over the web 
+
+> All communication between the client and the server is **encrypted** 
+
+> Even if someone intercepts the data, they **can not read it**
+
+> HTTPS is **standard on the internet** 
+
+Obtain an SSL/TLS Certificate 
+
+> SSL certificates enable encryption by using **public-key cryptography**
+
+> When a user connects to a website via HTTPs, the **web server provides its SSL certificate, which contains a public key 
+
+> The client **(browser)** uses this key to **stablish a secure**, encrypted session with the server 
+
+Generate a **self-signed certificate**
+
+Generated and signed by the server itself ( Locally )
+
+> Useful for testing or internal sites, but **not recommended for production**
+
+**CA-Signed** Certificate 
+
+> Issued and Authenticated by a trusted certificate authority  
+
+> CA **verifies the identity** of the organization requesting the certificate 
+
+> Trusted by Browsers ( no warnings )
+
+Generating SSl Certificate  ( Key pair )
+
+> openssl = open-source tool to generate keys, certificates and managing secure connections  
+
+Breakdown of commands 
+
+**openssl req** 
+
+> Initiates a certificate request generation process 
+
+**-x509**
+
+> Tells OpenSSL to output a certificate in this standard certificate format 
+
+**-nodes**
+
+> Tells OpenSSl not to encrypt the private key with a passphrase 
+
+**-days 365** 
+
+> Specifies validity period of the certificate, in this case 1 year 
+
+**-newkey rsa:2048** 
+
+> Creates a 2048-bit RSA key pair, RSA= most common public-key encryption algorithm 
+
+Public key is shared with clients to encrypt data 
+
+**-keyout nginx-selfsigned.key**
+
+> Specifies the output file for the generated private-key, in this case "nginx-selfsigned.key"
+
+Private key must be kept secretly. Its never shared publicly 
+
+Used to decrypt data
+
+**-out nginx-selfsigned.crt**
+
+> Specifies the output file for the self signed certificate, in this case "nginx-selfsigned.crt"
+
+> Contains the public key 
+
+Open the Command Prompt ( The command generates a key-pair )
+
+```
+mkdir nginx-certs
+cd nginx-certs
+openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout nginx-selfsigned.key -out nginx-selfsigned.crt
+> Country Name (2 letter code) [AU]: BR 
+...
+> Locally Name (eg, city) []: Jaboticabal/SP
+...
+> Organization Name (eg, company) [Internet Widgits Pty Ltd]: RodrigoMvs123 
+...
+
+ls 
+> nginx-selfsigned.crt       nginx-selfsigned.key
+
+cat nginx-selfsigned.crt
+> -----BEGIN CERTIFICATE----
+...
+  -----END CERTIFICATE-----
+```
+
+Configure HTTPS - for NGINX server 
+
+
 ```
 http {
+    include mime.types;
+
     upstream nodejs_cluster {
+        least_conn;
         server 127.0.0.1:3001;
         server 127.0.0.1:3002;
         server 127.0.0.1:3003;
     }
 
     server {
-        listen 8080;
-        server_name localhost; 
+        listen 8080;  
+        server_name localhost; # Where Nginx proxy server is listening 
 
         location / {
             proxy_pass http://nodejs_cluster;
@@ -1224,6 +1476,7 @@ http {
     }
 }
 ```
+
 
 
 #### Source Code
