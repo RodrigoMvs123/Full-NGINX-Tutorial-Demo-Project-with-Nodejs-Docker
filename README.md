@@ -1108,7 +1108,8 @@ If you have **1 worker process**, you will be able to serve **1024 clients**
 
 If you have **2 worker processes**, you will be able to serve 2x1024 = *2048 clients** ( Increases memory usage )
 
-```
+nginx.conf
+```conf
 events {
     worker_connections 1024;
 } 
@@ -1175,6 +1176,7 @@ Custom Headers
 
 Common headers that can be forwarded 
 
+nginx-conf
 ```conf
 location / {
     # Pass client information to the backend
@@ -1225,7 +1227,7 @@ Start from first server to the last one and it starts again from the first to th
 ```
 least_conn
 
-Request is sent to the server with the **least number of active connections** 
+Request is sent to the server with the least number of active connections
 ```
 
 #### Visual Studio Code
@@ -1452,8 +1454,193 @@ cat nginx-selfsigned.crt
 
 Configure HTTPS - for NGINX server 
 
+> 443 is the **standard port for HTTPS** traffic, enabling SSL for secure communication 
+
+> Configure the server to listen on port 443
+
+> The configuration of http server will be secured with SSL
+
+Look for the location path of the certificates
+
+Command Prompt ( Terminal )
+Terminal
+```
+Rodrigo /Users/Rodrigo/nginx-certs
+pwd 
+> ... 
 
 ```
+
+Restart NGINX and see it in action 
+
+> Nginx running with old configuration 
+
+Reload or Restart Nginx 
+
+Command Prompt ( Terminal )
+Terminal
+```
+Rodrigo /Users/Rodrigo/nginx-certs
+nginx -h
+> Options: 
+  -s   signal   : send signal to a master process: stop, quit, reopen, reload
+
+nginx -s reload 
+```
+
+Open in Browser
+
+- https://localhost ( Web Application served by Node.js Backend )
+
+
+```
+TWN Career Quiz 
+Your Custom Recommended Path 
+
+Home           Best Courses            Fun Tutorials               About Tech World with Nana
+
+TechWorld with Nana Programs 
+
+    DEVOPS                           ...                    ...
+   BOOTCAMP
+    by TWN
+
+Devops Bootcamp 
+
+Finally learn with structured 
+guided course, all Devops tools 
+together
+
+                            TechWorld with Nana. All Rights Reserved.
+                            Follow us on: Linkedin | Twitter | Instagram 
+``` 
+
+HTTP to HTTPS Redirection
+
+> Client will be redirected even with an HTTP web address to an HTTPS endpoint server 
+
+> 301 = Redirects the client ( browser ) to HTTPS using 301 status code, which indicates a permanent redirect 
+
+Command Prompt ( Terminal ) 
+Terminal
+```
+Rodrigo /Users/Rodrigo/nginx-certs
+nginx -s reload
+```
+
+Open in Browser
+
+- localhost:8080 ( Web Application served by Node.js Backend )
+
+```
+TWN Career Quiz 
+Your Custom Recommended Path 
+
+Home           Best Courses            Fun Tutorials               About Tech World with Nana
+
+TechWorld with Nana Programs 
+
+    DEVOPS                           ...                    ...
+   BOOTCAMP
+    by TWN
+
+Devops Bootcamp 
+
+Finally learn with structured 
+guided course, all Devops tools 
+together
+
+                            TechWorld with Nana. All Rights Reserved.
+                            Follow us on: Linkedin | Twitter | Instagram 
+``` 
+
+Redirected to 
+
+- https://localhost ( Web Application served by Node.js Backend )
+
+```
+TWN Career Quiz 
+Your Custom Recommended Path 
+
+Home           Best Courses            Fun Tutorials               About Tech World with Nana
+
+TechWorld with Nana Programs 
+
+    DEVOPS                           ...                    ...
+   BOOTCAMP
+    by TWN
+
+Devops Bootcamp 
+
+Finally learn with structured 
+guided course, all Devops tools 
+together
+
+                            TechWorld with Nana. All Rights Reserved.
+                            Follow us on: Linkedin | Twitter | Instagram 
+``` 
+
+Command Prompt ( Terminal )
+Terminal
+```
+Rodrigo /Users/Rodrigo/nginx-certs
+nginx -s reload
+```
+
+Open in Browser
+
+- localhost ( Web Application served by Node.js Backend )
+
+```
+TWN Career Quiz 
+Your Custom Recommended Path 
+
+Home           Best Courses            Fun Tutorials               About Tech World with Nana
+
+TechWorld with Nana Programs 
+
+    DEVOPS                           ...                    ...
+   BOOTCAMP
+    by TWN
+
+Devops Bootcamp 
+
+Finally learn with structured 
+guided course, all Devops tools 
+together
+
+                            TechWorld with Nana. All Rights Reserved.
+                            Follow us on: Linkedin | Twitter | Instagram 
+``` 
+
+Redirected to 
+
+- https://localhost ( Web Application served by Node.js Backend )
+
+```
+TWN Career Quiz 
+Your Custom Recommended Path 
+
+Home           Best Courses            Fun Tutorials               About Tech World with Nana
+
+TechWorld with Nana Programs 
+
+    DEVOPS                           ...                    ...
+   BOOTCAMP
+    by TWN
+
+Devops Bootcamp 
+
+Finally learn with structured 
+guided course, all Devops tools 
+together
+
+                            TechWorld with Nana. All Rights Reserved.
+                            Follow us on: Linkedin | Twitter | Instagram 
+``` 
+
+nginx.conf
+```conf
 http {
     include mime.types;
 
@@ -1465,8 +1652,13 @@ http {
     }
 
     server {
-        listen 8080;  
-        server_name localhost; # Where Nginx proxy server is listening 
+        listen 443 ssl;  
+        server_name localhost; // Where Nginx proxy server is listening 
+ 
+        ssl_certificate Users/Rodrigo/nginx-certs/nginx-$selfsigned.crt;    // Public Key
+        ssl_certificate_key Users/Rodrigo/nginx-certs/nginx-selfsigned.key; // Private Key 
+
+
 
         location / {
             proxy_pass http://nodejs_cluster;
@@ -1474,10 +1666,17 @@ http {
             proxy_set_header X-Real-IP $remote_addr;
         }
     }
+
+    server {
+        listen 80;
+        server_name localhost;
+
+        location / {
+            return 301 https://$host $request_uri;
+        }
+    }
 }
 ```
-
-
 
 #### Source Code
 
@@ -1543,16 +1742,24 @@ http {
 }
 ```
 
+## Clean Up Resources 
 
+Command Prompt ( Terminal )
+Terminal
+```
+Rodrigo /Users/Rodrigo/nginx-certs
+nginx -s stop
 
+ps aux | grep nginx 
+RodrigoMva123         33627   0.0    0.0    408636112      1440 s010  S+   1:28PM    0:00.00    grep nginx 
+```
 
-## Put NGINX Proxy in front of our web application 
-
-
-
-
-
-
+#### Visual Studio Code
+Terminal
+```
+Rodrigo \Users\usuario\Desktop\Rodrigo\Full NGINX Tutorial Demo Project with Nodejs Docker\Full-NGINX-Tutorial-Demo-Project-with-Nodejs-Docker\index.html
+docker ps
+> CONTAINER ID   IMAGE    COMMAND   CREATED    STATUS    PORTS    NAMES   
 
 
 
